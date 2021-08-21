@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+require 'byebug'
 require 'fileutils'
 
 # return a list of files in the pathh
@@ -16,10 +17,7 @@ class Writer
   end
 
   def copy
-    @files_rename.each do |file_rename|
-      puts (file_rename[:rename]).to_s
-      FileUtils.cp(file_rename[:name], file_rename[:rename])
-    end
+    @files_rename.map { |file_rename| FileUtils.cp(file_rename[:name], file_rename[:rename]) }
   end
 
   def create_directory
